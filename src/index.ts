@@ -1,3 +1,8 @@
-import { TestComponent } from './components/TestComponent/TestComponent';
+import {
+	PaginatedList,
+	PaginatedListProps,
+	ItemProps,
+	PageNumbersProps
+} from './components/PaginatedList/PaginatedList';
 
-export { TestComponent };
+export { PaginatedList, PaginatedListProps, ItemProps, PageNumbersProps };
