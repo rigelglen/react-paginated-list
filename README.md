@@ -13,22 +13,23 @@ A simple react component to render a paginated list.
 - In the renderList prop, pass in the function to render out a single list item.
 
 ```
+let users = [{'a': 123, 'b': 345}, {'c': 678, 'd': 891}];
+return (
 <PaginatedList
-    list={state.users}
+    list={users}
     itemsPerPage={3}
-    onPageChange={onPageChange}
     renderList={(list) => (
       <>
         {list.map((item, id) => {
           return (
             <div key={id}>
-              {item.first_name} {item.last_name}
+              {item.a} {item.b}
             </div>
           );
         })}
       </>
     )}
-  />
+  />);
 ```
 
 ## Example Project
