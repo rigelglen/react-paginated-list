@@ -48,6 +48,7 @@ npm run dev
 ## Props
 
 \* indicates a required prop
+
 |             Prop            |                                                          Description                                                         |                     Type                    |        Default       |
 |:---------------------------:|:----------------------------------------------------------------------------------------------------------------------------:|:-------------------------------------------:|:--------------------:|
 |            list\*           | This is the list of items managed by the component. <br> This list will be available in the renderList method to render your list |               Array<ListItem>               |           -          |
