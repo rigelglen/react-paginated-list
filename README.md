@@ -50,7 +50,7 @@ npm run dev
 \* indicates a required prop
 | Prop | Description | Type | Default |
 |:---------------------------:|:----------------------------------------------------------------------------------------------------------------------------:|:-------------------------------------------:|:--------------------:|
-| list\* | This is the list of items managed by the component. This list will be available in the renderList method to render your list | Array<ListItem> | - |
+| list\* | This is the list of items managed by the component. <br> This list will be available in the renderList method to render your list | Array<ListItem> | - |
 | renderList\* | This is the function that renders each of your list items. | (list: Array) => JSX.Element | - |
 | itemsPerPage | Number of items per page | number | `10` |
 | onPageChange | Callback function that is called when the page is changed | (items: Array, currentPage: number) => void | - |
