@@ -1,6 +1,7 @@
 {
   "name": "example",
   "version": "1.0.0",
+  "homepage": "./",
   "private": true,
   "dependencies": {
     "react": "^16.12.0",
