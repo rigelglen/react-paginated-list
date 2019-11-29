@@ -29,9 +29,9 @@ export const generatePageArray = (
   if (currentPage < 0) {
     currentPage = 0;
   }
-  let leftSideIndex = leftMargin;
+  const leftSideIndex = leftMargin;
 
-  let rightSideIndex = items.length - rightMargin - 1;
+  const rightSideIndex = items.length - rightMargin - 1;
 
   let finalArr: Array<number> = [];
 

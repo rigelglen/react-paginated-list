@@ -1,15 +1,20 @@
 import * as React from 'react';
 import { useState } from 'react';
 import { getNumberOfPages, getCurrentPage, generatePageArray } from './utils';
+import { AnyStyledComponent } from 'styled-components';
+import { DefaultControlContainer, DefaultControlItem, DefaultPaginationContainer } from './PaginatedList.styles';
 
 export interface PaginatedListProps<ListItem> {
   list: Array<ListItem>;
-  renderList(list: Array<ListItem>): JSX.Element;
+  renderList?(list: Array<ListItem>): JSX.Element;
   itemsPerPage?: number;
   onPageChange?(items: Array<ListItem>, currentPage: number): void;
   isLoading?: boolean;
+  ControlItem?: AnyStyledComponent;
+  ControlContainer?: AnyStyledComponent;
+  PaginatedListContainer?: AnyStyledComponent;
   loadingItem?(): JSX.Element;
-  breakItem?(): JSX.Element;
+  breakText?: string;
   displayRange?: number;
   leftMargin?: number;
   rightMargin?: number;
@@ -18,19 +23,15 @@ export interface PaginatedListProps<ListItem> {
   activeControlClass?: string;
   displayNumbers?: boolean;
   loopAround?: boolean;
+  paginatedListContainerClass?: string;
+  breakClass?: string;
   nextClass?: string;
   prevClass?: string;
+  controlItemClass?: string;
+  showPrev?: boolean;
+  showNext?: boolean;
   nextText?: string;
   prevText?: string;
-}
-
-export interface ItemProps {
-  item: number;
-  currentPageState: number;
-  onPageNumberChange(page: number, amount?: number): void;
-  shouldDisplayBreak: boolean;
-  breakItem(): JSX.Element;
-  activeControlClass: string;
 }
 
 export interface PageNumbersProps {
@@ -40,7 +41,10 @@ export interface PageNumbersProps {
   displayRange: number;
   leftMargin: number;
   rightMargin: number;
-  breakItem(): JSX.Element;
+  ControlContainer: AnyStyledComponent;
+  ControlItem: AnyStyledComponent;
+  breakText: string;
+  breakClass: string;
   controlClass: string;
   displayNumbers?: boolean;
   activeControlClass: string;
@@ -48,6 +52,22 @@ export interface PageNumbersProps {
   prevClass: string;
   nextText: string;
   prevText: string;
+  controlItemClass?: string;
+  showPrev?: boolean;
+  showNext?: boolean;
+}
+
+export interface ItemProps {
+  item: number;
+  breakTo: number;
+  currentPageState: number;
+  onPageNumberChange(page: number, amount?: number): void;
+  shouldDisplayBreak: boolean;
+  controlItemClass?: string;
+  breakText: string;
+  breakClass: string;
+  ControlItem: AnyStyledComponent;
+  activeControlClass: string;
 }
 
 export const PaginatedList = <ListItem,>({
@@ -56,8 +76,12 @@ export const PaginatedList = <ListItem,>({
   onPageChange,
   renderList,
   isLoading = false,
+  ControlItem = DefaultControlItem,
+  ControlContainer = DefaultControlContainer,
+  PaginatedListContainer = DefaultPaginationContainer,
   loadingItem = () => <p>Loading...</p>,
-  breakItem = () => <li>...</li>,
+  breakText = '...',
+  breakClass = 'pagination-break',
   displayRange = 3,
   leftMargin = 1,
   rightMargin = 1,
@@ -70,10 +94,14 @@ export const PaginatedList = <ListItem,>({
   activeControlClass = 'active',
   nextText = '〉',
   prevText = '〈',
+  controlItemClass = 'pagination-item',
+  showPrev = true,
+  showNext = true,
+  paginatedListContainerClass,
 }: PaginatedListProps<ListItem>) => {
   const [currentPageState, setcurrentPageState] = useState<number>(currentPage - 1);
 
-  const onPageNumberChange = (page: number, amount: number = 0) => {
+  const onPageNumberChange = (page: number, amount = 0) => {
     let result = page + amount;
     if (loopAround) {
       if (result < 0) {
@@ -82,14 +110,14 @@ export const PaginatedList = <ListItem,>({
     }
     if (result < list.length / itemsPerPage && result > -1) {
       setcurrentPageState(result);
-      let pageList = getCurrentPage(list, itemsPerPage, currentPageState);
+      const pageList = getCurrentPage(list, itemsPerPage, currentPageState);
       onPageChange && onPageChange(pageList, result + 1);
     }
   };
 
   if (isLoading === false)
     return (
-      <>
+      <PaginatedListContainer className={paginatedListContainerClass}>
         {renderList && renderList(getCurrentPage(list, itemsPerPage, currentPageState))}
 
         <PageNumbers
@@ -98,17 +126,23 @@ export const PaginatedList = <ListItem,>({
           onPageNumberChange={onPageNumberChange}
           displayRange={displayRange}
           leftMargin={leftMargin}
+          ControlContainer={ControlContainer}
+          ControlItem={ControlItem}
           rightMargin={rightMargin}
-          breakItem={breakItem}
+          breakText={breakText}
+          breakClass={breakClass}
           controlClass={controlClass}
           displayNumbers={displayNumbers}
           nextClass={nextClass}
           prevClass={prevClass}
+          controlItemClass={controlItemClass}
+          showPrev={showPrev}
+          showNext={showNext}
           activeControlClass={activeControlClass}
           prevText={prevText}
           nextText={nextText}
         />
-      </>
+      </PaginatedListContainer>
     );
   else {
     return loadingItem();
@@ -122,10 +156,16 @@ const PageNumbers = ({
   displayRange,
   leftMargin,
   rightMargin,
-  breakItem,
+  ControlItem,
+  ControlContainer,
+  breakText,
+  breakClass,
   displayNumbers,
   controlClass,
   activeControlClass,
+  controlItemClass,
+  showPrev,
+  showNext,
   nextClass,
   prevClass,
   nextText,
@@ -140,49 +180,73 @@ const PageNumbers = ({
 
   return (
     <>
-      <ul className={controlClass}>
-        <li className={prevClass} onClick={handleForward}>
-          {prevText}
-        </li>
+      <ControlContainer className={controlClass}>
+        {/* <ul className={controlClass}> */}
+        {showPrev === true && (
+          <ControlItem className={[prevClass, controlItemClass]} onClick={handleForward}>
+            {prevText}
+          </ControlItem>
+        )}
         {displayNumbers &&
           finalArr.map((item, index) => {
-            let shouldDisplayBreak = prevIndex + 1 !== item;
+            const breakTo = prevIndex + 1;
+            const shouldDisplayBreak = prevIndex + 1 !== item;
             prevIndex = item;
             return (
               <Item
                 key={index}
                 item={item}
+                breakTo={breakTo}
+                ControlItem={ControlItem}
                 currentPageState={currentPageState}
                 shouldDisplayBreak={shouldDisplayBreak}
-                breakItem={breakItem}
+                breakText={breakText}
+                breakClass={breakClass}
+                controlItemClass={controlItemClass}
                 onPageNumberChange={onPageNumberChange}
                 activeControlClass={activeControlClass}
               />
             );
           })}
-        <li className={nextClass} onClick={handleBackWard}>
-          {nextText}
-        </li>
-      </ul>
+        {showNext === true && (
+          <ControlItem className={[nextClass, controlItemClass]} onClick={handleBackWard}>
+            {nextText}
+          </ControlItem>
+        )}
+      </ControlContainer>
+      {/* </ul> */}
     </>
   );
 }; // Page number...
 
 const Item = ({
   item,
+  breakTo,
   currentPageState,
   onPageNumberChange,
   shouldDisplayBreak,
-  breakItem,
+  breakText,
+  breakClass,
+  ControlItem,
+  controlItemClass,
   activeControlClass,
 }: ItemProps) => {
   const handleClick = () => onPageNumberChange(item);
+  const handleBreakClick = () => onPageNumberChange(breakTo);
+
   return (
     <>
-      {shouldDisplayBreak && breakItem()}
-      <li onClick={handleClick} className={item === currentPageState ? activeControlClass : ''}>
+      {shouldDisplayBreak && (
+        <ControlItem onClick={handleBreakClick} className={[breakClass, controlItemClass]}>
+          {breakText}
+        </ControlItem>
+      )}
+      <ControlItem
+        onClick={handleClick}
+        className={`${item === currentPageState ? activeControlClass : ''} ${controlItemClass}`}
+      >
         {item + 1}
-      </li>
+      </ControlItem>
     </>
   );
 };

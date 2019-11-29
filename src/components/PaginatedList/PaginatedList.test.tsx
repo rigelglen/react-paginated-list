@@ -1,25 +1,25 @@
 import { PaginatedList } from './paginatedList';
-import * as React from 'react';
+import React from 'react';
 import Enzyme from 'enzyme';
 import { mount } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 Enzyme.configure({ adapter: new Adapter() });
 
 const list = [
-  { first_name: 'fdsfsdf1', last_name: 'dfgsdfdsf' },
-  { first_name: 'fdsfsdf2', last_name: 'dfgsdfdsf' },
-  { first_name: 'fdsfsdf3', last_name: 'dfgsdfdsf' },
-  { first_name: 'fdsfsdf4', last_name: 'dfgsdfdsf' },
-  { first_name: 'fdsfsdf5', last_name: 'dfgsdfdsf' },
-  { first_name: 'fdsfsdf6', last_name: 'dfgsdfdsf' },
-  { first_name: 'fdsfsdf7', last_name: 'dfgsdfdsf' },
-  { first_name: 'fdsfsdf8', last_name: 'dfgsdfdsf' },
-  { first_name: 'fdsfsdf9', last_name: 'dfgsdfdsf' },
-  { first_name: 'fdsfsdf10', last_name: 'dfgsdfdsf' },
-  { first_name: 'fdsfsdf11', last_name: 'dfgsdfdsf' },
-  { first_name: 'fdsfsdf12', last_name: 'dfgsdfdsf' },
-  { first_name: 'fdsfsdf13', last_name: 'dfgsdfdsf' },
-  { first_name: 'fdsfsdf14', last_name: 'dfgsdfdsf' },
+  { itemName: 'fdsfsdf1', itemValue: 'dfgsdfdsf' },
+  { itemName: 'fdsfsdf2', itemValue: 'dfgsdfdsf' },
+  { itemName: 'fdsfsdf3', itemValue: 'dfgsdfdsf' },
+  { itemName: 'fdsfsdf4', itemValue: 'dfgsdfdsf' },
+  { itemName: 'fdsfsdf5', itemValue: 'dfgsdfdsf' },
+  { itemName: 'fdsfsdf6', itemValue: 'dfgsdfdsf' },
+  { itemName: 'fdsfsdf7', itemValue: 'dfgsdfdsf' },
+  { itemName: 'fdsfsdf8', itemValue: 'dfgsdfdsf' },
+  { itemName: 'fdsfsdf9', itemValue: 'dfgsdfdsf' },
+  { itemName: 'fdsfsdf10', itemValue: 'dfgsdfdsf' },
+  { itemName: 'fdsfsdf11', itemValue: 'dfgsdfdsf' },
+  { itemName: 'fdsfsdf12', itemValue: 'dfgsdfdsf' },
+  { itemName: 'fdsfsdf13', itemValue: 'dfgsdfdsf' },
+  { itemName: 'fdsfsdf14', itemValue: 'dfgsdfdsf' },
 ];
 
 describe('rendering', () => {
@@ -78,7 +78,7 @@ describe('rendering', () => {
 
   it('returns the current page items and index', done => {
     const onPageChange = (items: any, index: any) => {
-      expect(items[0].first_name).toBe(list[0].first_name);
+      expect(items[0].itemName).toBe(list[0].itemName);
       expect(index).toBe(2);
       done();
     };

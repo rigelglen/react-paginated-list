@@ -1,16 +1,16 @@
 import { getNumberOfPages, getCurrentPage, generatePageArray } from './utils';
 
 const testList = [
-  { first_name: 'first_name_1', last_name: 'last_name_1' },
-  { first_name: 'first_name_2', last_name: 'last_name_2' },
-  { first_name: 'first_name_3', last_name: 'last_name_3' },
-  { first_name: 'first_name_4', last_name: 'last_name_4' },
-  { first_name: 'first_name_5', last_name: 'last_name_5' },
-  { first_name: 'first_name_6', last_name: 'last_name_6' },
-  { first_name: 'first_name_7', last_name: 'last_name_7' },
-  { first_name: 'first_name_8', last_name: 'last_name_8' },
-  { first_name: 'first_name_9', last_name: 'last_name_9' },
-  { first_name: 'first_name_10', last_name: 'last_name_10' },
+  { itemName: 'itemName_1', itemValue: 'itemValue_1' },
+  { itemName: 'itemName_2', itemValue: 'itemValue_2' },
+  { itemName: 'itemName_3', itemValue: 'itemValue_3' },
+  { itemName: 'itemName_4', itemValue: 'itemValue_4' },
+  { itemName: 'itemName_5', itemValue: 'itemValue_5' },
+  { itemName: 'itemName_6', itemValue: 'itemValue_6' },
+  { itemName: 'itemName_7', itemValue: 'itemValue_7' },
+  { itemName: 'itemName_8', itemValue: 'itemValue_8' },
+  { itemName: 'itemName_9', itemValue: 'itemValue_9' },
+  { itemName: 'itemName_10', itemValue: 'itemValue_10' },
 ];
 
 describe('testing utility functions', () => {

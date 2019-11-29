@@ -1,12 +1,16 @@
 /// <reference types="react" />
+import { AnyStyledComponent } from 'styled-components';
 export interface PaginatedListProps<ListItem> {
     list: Array<ListItem>;
-    renderList(list: Array<ListItem>): JSX.Element;
+    renderList?(list: Array<ListItem>): JSX.Element;
     itemsPerPage?: number;
     onPageChange?(items: Array<ListItem>, currentPage: number): void;
     isLoading?: boolean;
+    ControlItem?: AnyStyledComponent;
+    ControlContainer?: AnyStyledComponent;
+    PaginatedListContainer?: AnyStyledComponent;
     loadingItem?(): JSX.Element;
-    breakItem?(): JSX.Element;
+    breakText?: string;
     displayRange?: number;
     leftMargin?: number;
     rightMargin?: number;
@@ -15,18 +19,15 @@ export interface PaginatedListProps<ListItem> {
     activeControlClass?: string;
     displayNumbers?: boolean;
     loopAround?: boolean;
+    paginatedListContainerClass?: string;
+    breakClass?: string;
     nextClass?: string;
     prevClass?: string;
+    controlItemClass?: string;
+    showPrev?: boolean;
+    showNext?: boolean;
     nextText?: string;
     prevText?: string;
-}
-export interface ItemProps {
-    item: number;
-    currentPageState: number;
-    onPageNumberChange(page: number, amount?: number): void;
-    shouldDisplayBreak: boolean;
-    breakItem(): JSX.Element;
-    activeControlClass: string;
 }
 export interface PageNumbersProps {
     items: Array<number>;
@@ -35,7 +36,10 @@ export interface PageNumbersProps {
     displayRange: number;
     leftMargin: number;
     rightMargin: number;
-    breakItem(): JSX.Element;
+    ControlContainer: AnyStyledComponent;
+    ControlItem: AnyStyledComponent;
+    breakText: string;
+    breakClass: string;
     controlClass: string;
     displayNumbers?: boolean;
     activeControlClass: string;
@@ -43,5 +47,20 @@ export interface PageNumbersProps {
     prevClass: string;
     nextText: string;
     prevText: string;
+    controlItemClass?: string;
+    showPrev?: boolean;
+    showNext?: boolean;
 }
-export declare const PaginatedList: <ListItem>({ list, itemsPerPage, onPageChange, renderList, isLoading, loadingItem, breakItem, displayRange, leftMargin, rightMargin, currentPage, displayNumbers, loopAround, nextClass, prevClass, controlClass, activeControlClass, nextText, prevText, }: PaginatedListProps<ListItem>) => JSX.Element;
+export interface ItemProps {
+    item: number;
+    breakTo: number;
+    currentPageState: number;
+    onPageNumberChange(page: number, amount?: number): void;
+    shouldDisplayBreak: boolean;
+    controlItemClass?: string;
+    breakText: string;
+    breakClass: string;
+    ControlItem: AnyStyledComponent;
+    activeControlClass: string;
+}
+export declare const PaginatedList: <ListItem>({ list, itemsPerPage, onPageChange, renderList, isLoading, ControlItem, ControlContainer, PaginatedListContainer, loadingItem, breakText, breakClass, displayRange, leftMargin, rightMargin, currentPage, displayNumbers, loopAround, nextClass, prevClass, controlClass, activeControlClass, nextText, prevText, controlItemClass, showPrev, showNext, paginatedListContainerClass, }: PaginatedListProps<ListItem>) => JSX.Element;

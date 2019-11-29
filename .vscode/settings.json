@@ -16,5 +16,6 @@
   ],
   "editor.formatOnSave": true,
   "workbench.editor.enablePreview": false,
-  "workbench.editor.enablePreviewFromQuickOpen": false
+  "workbench.editor.enablePreviewFromQuickOpen": false,
+  "typescript.tsdk": "node_modules\\typescript\\lib"
 }
