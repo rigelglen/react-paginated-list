@@ -2,7 +2,7 @@
 
 A simple react component to render a paginated list ✨powered by styled-components 💅
 
-[DEMO](https://rigelglen.me/react-paginated-list)
+<a href="https://rigelglen.me/react-paginated-list" target="_blank">DEMO</a>
 
 ![React Paginated List working](https://i.imgur.com/tnwffrN.gif)
 
