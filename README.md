@@ -41,6 +41,12 @@ To run the example project,
 git clone https://github.com/rigelglen/react-paginated-list
 ```
 
+- Install deps
+
+```
+npm run install-all
+```
+
 - Run example project
 
 ```
