@@ -116,9 +116,11 @@ var PageNumbers = function (_a) {
     var prevIndex = -1;
     var handleForward = function () { return onPageNumberChange(currentPageState, -1); };
     var handleBackWard = function () { return onPageNumberChange(currentPageState, 1); };
+    var prevCssClasses = prevClass + " " + controlItemClass;
+    var nextCssClasses = nextClass + " " + controlItemClass;
     return (createElement(Fragment, null,
         createElement(ControlContainer, { className: controlClass },
-            showPrev === true && (createElement(ControlItem, { className: [prevClass, controlItemClass], onClick: handleForward }, prevText)),
+            showPrev === true && (createElement(ControlItem, { className: prevCssClasses, onClick: handleForward }, prevText)),
             displayNumbers &&
                 finalArr.map(function (item, index) {
                     var breakTo = prevIndex + 1;
@@ -126,7 +128,7 @@ var PageNumbers = function (_a) {
                     prevIndex = item;
                     return (createElement(Item, { key: index, item: item, breakTo: breakTo, ControlItem: ControlItem, currentPageState: currentPageState, shouldDisplayBreak: shouldDisplayBreak, breakText: breakText, breakClass: breakClass, controlItemClass: controlItemClass, onPageNumberChange: onPageNumberChange, activeControlClass: activeControlClass }));
                 }),
-            showNext === true && (createElement(ControlItem, { className: [nextClass, controlItemClass], onClick: handleBackWard }, nextText)))));
+            showNext === true && (createElement(ControlItem, { className: nextCssClasses, onClick: handleBackWard }, nextText)))));
 }; // Page number...
 var Item = function (_a) {
     var item = _a.item, breakTo = _a.breakTo, currentPageState = _a.currentPageState, onPageNumberChange = _a.onPageNumberChange, shouldDisplayBreak = _a.shouldDisplayBreak, breakText = _a.breakText, breakClass = _a.breakClass, ControlItem = _a.ControlItem, controlItemClass = _a.controlItemClass, activeControlClass = _a.activeControlClass;
