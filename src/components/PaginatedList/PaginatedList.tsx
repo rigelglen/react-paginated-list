@@ -177,13 +177,15 @@ const PageNumbers = ({
 
   const handleForward = () => onPageNumberChange(currentPageState, -1);
   const handleBackWard = () => onPageNumberChange(currentPageState, 1);
+  const prevCssClasses = `${prevClass} ${controlItemClass}`
+  const nextCssClasses = `${nextClass} ${controlItemClass}`
 
   return (
     <>
       <ControlContainer className={controlClass}>
         {/* <ul className={controlClass}> */}
         {showPrev === true && (
-          <ControlItem className={[prevClass, controlItemClass]} onClick={handleForward}>
+          <ControlItem className={prevCssClasses} onClick={handleForward}>
             {prevText}
           </ControlItem>
         )}
@@ -209,7 +211,7 @@ const PageNumbers = ({
             );
           })}
         {showNext === true && (
-          <ControlItem className={[nextClass, controlItemClass]} onClick={handleBackWard}>
+          <ControlItem className={nextCssClasses} onClick={handleBackWard}>
             {nextText}
           </ControlItem>
         )}
