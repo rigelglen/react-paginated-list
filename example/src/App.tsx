@@ -1,8 +1,7 @@
-import React from 'react';
-import { useState } from 'react';
-import { PaginatedList } from './react-paginated-list';
-import { ControlContainer, ControlItem, StyledList, Button, PaginatedListContainer } from './styles';
+import React, { useState } from 'react';
 import './index.css';
+import { PaginatedList } from './react-paginated-list';
+import { Button, ControlContainer, ControlItem, PaginatedListContainer, StyledList } from './styles';
 
 interface AppState {
   isLoading: boolean;

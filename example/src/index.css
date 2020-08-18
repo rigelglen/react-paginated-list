@@ -46,10 +46,12 @@ h1 {
   position: relative;
   transition: 0.5s;
 }
+
 #forkongithub a:hover {
   background: #c11;
   color: #fff;
 }
+
 #forkongithub a::before,
 #forkongithub a::after {
   content: '';
@@ -61,10 +63,12 @@ h1 {
   height: 1px;
   background: #fff;
 }
+
 #forkongithub a::after {
   bottom: 1px;
   top: auto;
 }
+
 @media screen and (min-width: 800px) {
   #forkongithub {
     position: absolute;

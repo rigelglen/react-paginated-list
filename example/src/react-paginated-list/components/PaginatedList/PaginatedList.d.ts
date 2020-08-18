@@ -28,6 +28,7 @@ export interface PaginatedListProps<ListItem> {
     showNext?: boolean;
     nextText?: string;
     prevText?: string;
+    useMinimalControls?: boolean;
 }
 export interface PageNumbersProps {
     items: Array<number>;
@@ -50,6 +51,7 @@ export interface PageNumbersProps {
     controlItemClass?: string;
     showPrev?: boolean;
     showNext?: boolean;
+    useMinimalControls?: boolean;
 }
 export interface ItemProps {
     item: number;
@@ -63,4 +65,4 @@ export interface ItemProps {
     ControlItem: AnyStyledComponent;
     activeControlClass: string;
 }
-export declare const PaginatedList: <ListItem>({ list, itemsPerPage, onPageChange, renderList, isLoading, ControlItem, ControlContainer, PaginatedListContainer, loadingItem, breakText, breakClass, displayRange, leftMargin, rightMargin, currentPage, displayNumbers, loopAround, nextClass, prevClass, controlClass, activeControlClass, nextText, prevText, controlItemClass, showPrev, showNext, paginatedListContainerClass, }: PaginatedListProps<ListItem>) => JSX.Element;
+export declare const PaginatedList: <ListItem>({ list, itemsPerPage, onPageChange, renderList, isLoading, ControlItem, ControlContainer, PaginatedListContainer, loadingItem, breakText, breakClass, displayRange, leftMargin, rightMargin, currentPage, displayNumbers, loopAround, nextClass, prevClass, controlClass, activeControlClass, nextText, prevText, controlItemClass, showPrev, showNext, useMinimalControls, paginatedListContainerClass, }: PaginatedListProps<ListItem>) => JSX.Element;

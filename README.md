@@ -82,10 +82,11 @@ npm run dev
 |          prevClass          |                                                   Class of the prev button                                                   |                    string                   |        `prev`        |
 | paginatedListContainerClass |                     Class of the entire paginated list (contains the actual list and pagination controls)                    |                    string                   |           -          |
 |       controlItemClass      |                                            Class of every pagination control item                                            |                    string                   |   `pagination-item`  |
-|           showPrev          |                                               Show previous pagination control                                               |                    string                   |        `true`        |
-|           showNext          |                                                 Show next pagination control                                                 |                    string                   |        `true`        |
+|           showPrev          |                                               Show previous pagination control                                               |                    boolean                   |        `true`        |
+|           showNext          |                                                 Show next pagination control                                                 |                    boolean                   |        `true`        |
 |           nextText          |                                                    Text inside next button                                                   |                    string                   |        `'〉'`        |
 |           prevText          |                                                    Text inside prev button                                                   |                    string                   |        `'〈'`        |
+|           minimalContols          |                                                    Hides next or previous button if there is no next or previous page respectively                                                   |                    boolean                   |        `false`        |
 ## LICENSE
 
 Released under the MIT license.

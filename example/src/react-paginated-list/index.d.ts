@@ -1,2 +1,2 @@
-import { PaginatedList, PaginatedListProps, ItemProps, PageNumbersProps } from './components/PaginatedList/PaginatedList';
+import { ItemProps, PageNumbersProps, PaginatedList, PaginatedListProps } from './components/PaginatedList/PaginatedList';
 export { PaginatedList, PaginatedListProps, ItemProps, PageNumbersProps };

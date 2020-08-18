@@ -1,8 +1,7 @@
-import { PaginatedList } from './paginatedList';
-import React from 'react';
-import Enzyme from 'enzyme';
-import { mount } from 'enzyme';
+import Enzyme, { mount } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
+import React from 'react';
+import { PaginatedList } from './paginatedList';
 Enzyme.configure({ adapter: new Adapter() });
 
 const list = [
@@ -46,12 +45,7 @@ describe('rendering', () => {
       currentPage: 1,
     };
     const component = mount(<PaginatedList {...props} />);
-    expect(
-      component
-        .find('li')
-        .at(props.currentPage)
-        .hasClass(props.activeControlClass),
-    ).toBe(true);
+    expect(component.find('li').at(props.currentPage).hasClass(props.activeControlClass)).toBe(true);
   });
 
   it('shows loading item', () => {
@@ -64,7 +58,7 @@ describe('rendering', () => {
     expect(component.find('p').text()).toBe('Loading...');
   });
 
-  it('changes pages', done => {
+  it('changes pages', (done) => {
     const onPageChange = () => {
       done();
     };
@@ -76,7 +70,7 @@ describe('rendering', () => {
     component.find('.next').simulate('click');
   });
 
-  it('returns the current page items and index', done => {
+  it('returns the current page items and index', (done) => {
     const onPageChange = (items: any, index: any) => {
       expect(items[0].itemName).toBe(list[0].itemName);
       expect(index).toBe(2);

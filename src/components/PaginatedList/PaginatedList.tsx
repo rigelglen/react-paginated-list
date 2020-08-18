@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { useState } from 'react';
-import { getNumberOfPages, getCurrentPage, generatePageArray } from './utils';
 import { AnyStyledComponent } from 'styled-components';
 import { DefaultControlContainer, DefaultControlItem, DefaultPaginationContainer } from './PaginatedList.styles';
+import { generatePageArray, getCurrentPage, getNumberOfPages } from './utils';
 
 export interface PaginatedListProps<ListItem> {
   list: Array<ListItem>;
@@ -32,6 +32,7 @@ export interface PaginatedListProps<ListItem> {
   showNext?: boolean;
   nextText?: string;
   prevText?: string;
+  useMinimalControls?: boolean;
 }
 
 export interface PageNumbersProps {
@@ -55,6 +56,7 @@ export interface PageNumbersProps {
   controlItemClass?: string;
   showPrev?: boolean;
   showNext?: boolean;
+  useMinimalControls?: boolean;
 }
 
 export interface ItemProps {
@@ -97,6 +99,7 @@ export const PaginatedList = <ListItem,>({
   controlItemClass = 'pagination-item',
   showPrev = true,
   showNext = true,
+  useMinimalControls = false,
   paginatedListContainerClass,
 }: PaginatedListProps<ListItem>) => {
   const [currentPageState, setcurrentPageState] = useState<number>(currentPage - 1);
@@ -141,6 +144,7 @@ export const PaginatedList = <ListItem,>({
           activeControlClass={activeControlClass}
           prevText={prevText}
           nextText={nextText}
+          useMinimalControls={useMinimalControls}
         />
       </PaginatedListContainer>
     );
@@ -170,6 +174,7 @@ const PageNumbers = ({
   prevClass,
   nextText,
   prevText,
+  useMinimalControls,
 }: PageNumbersProps) => {
   const finalArr = generatePageArray(items, currentPageState, leftMargin, rightMargin, displayRange);
 
@@ -177,14 +182,16 @@ const PageNumbers = ({
 
   const handleForward = () => onPageNumberChange(currentPageState, -1);
   const handleBackWard = () => onPageNumberChange(currentPageState, 1);
-  const prevCssClasses = `${prevClass} ${controlItemClass}`
-  const nextCssClasses = `${nextClass} ${controlItemClass}`
+  const prevCssClasses = `${prevClass} ${controlItemClass}`;
+  const nextCssClasses = `${nextClass} ${controlItemClass}`;
+
+  const hidePrev = useMinimalControls && currentPageState === 0;
+  const hideNext = useMinimalControls && currentPageState + 1 === items.length;
 
   return (
     <>
       <ControlContainer className={controlClass}>
-        {/* <ul className={controlClass}> */}
-        {showPrev === true && (
+        {showPrev === true && hidePrev === false && (
           <ControlItem className={prevCssClasses} onClick={handleForward}>
             {prevText}
           </ControlItem>
@@ -210,7 +217,7 @@ const PageNumbers = ({
               />
             );
           })}
-        {showNext === true && (
+        {showNext === true && hideNext === false && (
           <ControlItem className={nextCssClasses} onClick={handleBackWard}>
             {nextText}
           </ControlItem>

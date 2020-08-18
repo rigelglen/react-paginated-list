@@ -1,4 +1,4 @@
-import { getNumberOfPages, getCurrentPage, generatePageArray } from './utils';
+import { generatePageArray, getCurrentPage, getNumberOfPages } from './utils';
 
 const testList = [
   { itemName: 'itemName_1', itemValue: 'itemValue_1' },
