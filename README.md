@@ -86,7 +86,7 @@ npm run dev
 |           showNext          |                                                 Show next pagination control                                                 |                    boolean                   |        `true`        |
 |           nextText          |                                                    Text inside next button                                                   |                    string                   |        `'〉'`        |
 |           prevText          |                                                    Text inside prev button                                                   |                    string                   |        `'〈'`        |
-|           minimalContols          |                                                    Hides next or previous button if there is no next or previous page respectively                                                   |                    boolean                   |        `false`        |
+|           useMinimalControls          |                                                    Hides next or previous button if there is no next or previous page respectively                                                   |                    boolean                   |        `false`        |
 ## LICENSE
 
 Released under the MIT license.

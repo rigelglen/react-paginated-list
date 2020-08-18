@@ -96,6 +96,7 @@ function App() {
           loadingItem={() => <p>Loading...</p>}
           nextText="Next"
           prevText="Prev"
+          useMinimalControls={true}
           renderList={(list: Array<User>) => (
             <StyledList>
               {list.map((item: User, id: number) => {
