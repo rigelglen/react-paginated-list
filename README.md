@@ -1,8 +1,12 @@
 # React Paginated List
+[![npm](https://img.shields.io/npm/v/react-paginated-list?style=for-the-badge)](https://www.npmjs.com/package/react-paginated-list)
+[![npm](https://img.shields.io/npm/dt/react-paginated-list?style=for-the-badge)](https://www.npmjs.com/package/react-paginated-list)
+[![NPM](https://img.shields.io/npm/l/react-paginated-list?style=for-the-badge)](LICENSE)
 
 A simple react component to render a paginated list ✨powered by styled-components 💅
 
-<a href="https://rigelglen.github.io/react-paginated-list/" target="_blank">DEMO</a>
+[![DEMO](https://img.shields.io/badge/DEMO-green?style=for-the-badge)](https://rigelglen.github.io/react-paginated-list/)
+
 
 ![React Paginated List working](https://i.imgur.com/tnwffrN.gif)
 
