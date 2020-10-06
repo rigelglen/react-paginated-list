@@ -113,7 +113,7 @@ export const PaginatedList = <ListItem,>({
     }
     if (result < list.length / itemsPerPage && result > -1) {
       setcurrentPageState(result);
-      const pageList = getCurrentPage(list, itemsPerPage, currentPageState);
+      const pageList = getCurrentPage(list, itemsPerPage, result);
       onPageChange && onPageChange(pageList, result + 1);
     }
   };
