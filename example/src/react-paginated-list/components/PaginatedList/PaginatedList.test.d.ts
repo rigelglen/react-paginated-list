@@ -1,1 +1,1 @@
-export {};
+import 'jest-styled-components';

@@ -94,9 +94,10 @@ function App() {
           breakText={'...'}
           breakClass={'pagination-break'}
           loadingItem={() => <p>Loading...</p>}
+          loopAround={true}
           nextText="Next"
           prevText="Prev"
-          useMinimalControls={true}
+          useMinimalControls={false}
           renderList={(list: Array<User>) => (
             <StyledList>
               {list.map((item: User, id: number) => {

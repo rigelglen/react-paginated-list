@@ -24,6 +24,11 @@ describe('testing utility functions', () => {
       const itemsPerPage = 0;
       expect(getNumberOfPages(testList, itemsPerPage).length).toBe(0);
     });
+
+    it('throws error for a non array list', () => {
+      const itemsPerPage = 10;
+      expect(() => getNumberOfPages({} as any, itemsPerPage)).toThrow();
+    });
   });
 
   describe('getCurrentPage', () => {
@@ -48,6 +53,12 @@ describe('testing utility functions', () => {
       const itemsPerPage = 2;
       const page = -2;
       expect(getCurrentPage(testList, itemsPerPage, page).length).toBe(0);
+    });
+
+    it('throws error for a non array list', () => {
+      const itemsPerPage = 10;
+      const page = 0;
+      expect(() => getCurrentPage({} as any, itemsPerPage, page)).toThrow();
     });
   });
 

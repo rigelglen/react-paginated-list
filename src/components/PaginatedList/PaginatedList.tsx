@@ -101,17 +101,20 @@ export const PaginatedList = <ListItem,>({
   showNext = true,
   useMinimalControls = false,
   paginatedListContainerClass,
-}: PaginatedListProps<ListItem>) => {
+}: PaginatedListProps<ListItem>): JSX.Element => {
   const [currentPageState, setcurrentPageState] = useState<number>(currentPage - 1);
 
   const onPageNumberChange = (page: number, amount = 0) => {
-    let result = page + amount;
+    let result = page + (amount % Math.ceil(list.length / itemsPerPage));
     if (loopAround) {
       if (result < 0) {
-        result = Math.floor(list.length / itemsPerPage);
-      } else result = result % (Math.floor(list.length / itemsPerPage) + 1);
+        result = Math.ceil(list.length / itemsPerPage) + amount;
+      } else {
+        result = result % Math.ceil(list.length / itemsPerPage);
+      }
     }
-    if (result < list.length / itemsPerPage && result > -1) {
+    /* istanbul ignore else */
+    if (result < Math.ceil(list.length / itemsPerPage) && result > -1) {
       setcurrentPageState(result);
       const pageList = getCurrentPage(list, itemsPerPage, result);
       onPageChange && onPageChange(pageList, result + 1);
@@ -180,8 +183,8 @@ const PageNumbers = ({
 
   let prevIndex = -1;
 
-  const handleForward = () => onPageNumberChange(currentPageState, -1);
-  const handleBackWard = () => onPageNumberChange(currentPageState, 1);
+  const handleBackward = () => onPageNumberChange(currentPageState, -1);
+  const handleForward = () => onPageNumberChange(currentPageState, 1);
   const prevCssClasses = `${prevClass} ${controlItemClass}`;
   const nextCssClasses = `${nextClass} ${controlItemClass}`;
 
@@ -192,7 +195,7 @@ const PageNumbers = ({
     <>
       <ControlContainer className={controlClass}>
         {showPrev === true && hidePrev === false && (
-          <ControlItem className={prevCssClasses} onClick={handleForward}>
+          <ControlItem className={prevCssClasses} onClick={handleBackward}>
             {prevText}
           </ControlItem>
         )}
@@ -218,7 +221,7 @@ const PageNumbers = ({
             );
           })}
         {showNext === true && hideNext === false && (
-          <ControlItem className={nextCssClasses} onClick={handleBackWard}>
+          <ControlItem className={nextCssClasses} onClick={handleForward}>
             {nextText}
           </ControlItem>
         )}

@@ -88,17 +88,19 @@ var PaginatedList = function (_a) {
     var _1 = useState(currentPage - 1), currentPageState = _1[0], setcurrentPageState = _1[1];
     var onPageNumberChange = function (page, amount) {
         if (amount === void 0) { amount = 0; }
-        var result = page + amount;
+        var result = page + (amount % Math.ceil(list.length / itemsPerPage));
         if (loopAround) {
             if (result < 0) {
-                result = Math.floor(list.length / itemsPerPage);
+                result = Math.ceil(list.length / itemsPerPage) + amount;
             }
-            else
-                result = result % (Math.floor(list.length / itemsPerPage) + 1);
+            else {
+                result = result % Math.ceil(list.length / itemsPerPage);
+            }
         }
-        if (result < list.length / itemsPerPage && result > -1) {
+        /* istanbul ignore else */
+        if (result < Math.ceil(list.length / itemsPerPage) && result > -1) {
             setcurrentPageState(result);
-            var pageList = getCurrentPage(list, itemsPerPage, currentPageState);
+            var pageList = getCurrentPage(list, itemsPerPage, result);
             onPageChange && onPageChange(pageList, result + 1);
         }
     };
@@ -114,15 +116,15 @@ var PageNumbers = function (_a) {
     var items = _a.items, currentPageState = _a.currentPageState, onPageNumberChange = _a.onPageNumberChange, displayRange = _a.displayRange, leftMargin = _a.leftMargin, rightMargin = _a.rightMargin, ControlItem = _a.ControlItem, ControlContainer = _a.ControlContainer, breakText = _a.breakText, breakClass = _a.breakClass, displayNumbers = _a.displayNumbers, controlClass = _a.controlClass, activeControlClass = _a.activeControlClass, controlItemClass = _a.controlItemClass, showPrev = _a.showPrev, showNext = _a.showNext, nextClass = _a.nextClass, prevClass = _a.prevClass, nextText = _a.nextText, prevText = _a.prevText, useMinimalControls = _a.useMinimalControls;
     var finalArr = generatePageArray(items, currentPageState, leftMargin, rightMargin, displayRange);
     var prevIndex = -1;
-    var handleForward = function () { return onPageNumberChange(currentPageState, -1); };
-    var handleBackWard = function () { return onPageNumberChange(currentPageState, 1); };
+    var handleBackward = function () { return onPageNumberChange(currentPageState, -1); };
+    var handleForward = function () { return onPageNumberChange(currentPageState, 1); };
     var prevCssClasses = prevClass + " " + controlItemClass;
     var nextCssClasses = nextClass + " " + controlItemClass;
     var hidePrev = useMinimalControls && currentPageState === 0;
     var hideNext = useMinimalControls && currentPageState + 1 === items.length;
     return (createElement(Fragment, null,
         createElement(ControlContainer, { className: controlClass },
-            showPrev === true && hidePrev === false && (createElement(ControlItem, { className: prevCssClasses, onClick: handleForward }, prevText)),
+            showPrev === true && hidePrev === false && (createElement(ControlItem, { className: prevCssClasses, onClick: handleBackward }, prevText)),
             displayNumbers &&
                 finalArr.map(function (item, index) {
                     var breakTo = prevIndex + 1;
@@ -130,7 +132,7 @@ var PageNumbers = function (_a) {
                     prevIndex = item;
                     return (createElement(Item, { key: index, item: item, breakTo: breakTo, ControlItem: ControlItem, currentPageState: currentPageState, shouldDisplayBreak: shouldDisplayBreak, breakText: breakText, breakClass: breakClass, controlItemClass: controlItemClass, onPageNumberChange: onPageNumberChange, activeControlClass: activeControlClass }));
                 }),
-            showNext === true && hideNext === false && (createElement(ControlItem, { className: nextCssClasses, onClick: handleBackWard }, nextText)))));
+            showNext === true && hideNext === false && (createElement(ControlItem, { className: nextCssClasses, onClick: handleForward }, nextText)))));
 }; // Page number...
 var Item = function (_a) {
     var item = _a.item, breakTo = _a.breakTo, currentPageState = _a.currentPageState, onPageNumberChange = _a.onPageNumberChange, shouldDisplayBreak = _a.shouldDisplayBreak, breakText = _a.breakText, breakClass = _a.breakClass, ControlItem = _a.ControlItem, controlItemClass = _a.controlItemClass, activeControlClass = _a.activeControlClass;
