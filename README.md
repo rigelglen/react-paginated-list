@@ -10,12 +10,22 @@ A simple react component to render a paginated list ✨powered by styled-compone
 
 ![React Paginated List working](https://i.imgur.com/tnwffrN.gif)
 
+## Installation
+### Using npm
+```shell
+npm install react-paginated-list
+```
+### Or yarn
+```shell
+yarn install react-paginated-list
+```
+
 ## Usage
 
 - Pass in the list items that contain your data in the list prop
 - In the renderList prop, pass in the function to render out the list.
 
-```
+```javascript
 let users = [{'a': 123, 'b': 345}, {'c': 678, 'd': 891}];
 return (
 <PaginatedList
@@ -41,19 +51,19 @@ To run the example project,
 
 - Clone the repo
 
-```
+```shell
 git clone https://github.com/rigelglen/react-paginated-list
 ```
 
 - Install deps
 
-```
+```shell
 npm run install-all
 ```
 
 - Run example project
 
-```
+```shell
 npm run dev
 ```
 
