@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { AnyStyledComponent } from 'styled-components';
 import { DefaultControlContainer, DefaultControlItem, DefaultPaginationContainer } from './PaginatedList.styles';
 import { generatePageArray, getCurrentPage, getNumberOfPages } from './utils';
@@ -104,6 +104,16 @@ export const PaginatedList = <ListItem,>({
 }: PaginatedListProps<ListItem>): JSX.Element => {
   const [currentPageState, setcurrentPageState] = useState<number>(currentPage - 1);
 
+  useEffect(() => {
+    const maxPage = Math.floor((list.length - 1) / itemsPerPage);
+    if (maxPage < currentPageState) {
+      setcurrentPageState(maxPage);
+    }
+    if (maxPage < 0) {
+      setcurrentPageState(0);
+    }
+  }, [list.length])
+
   const onPageNumberChange = (page: number, amount = 0) => {
     let result = page + (amount % Math.ceil(list.length / itemsPerPage));
     if (loopAround) {
@@ -180,6 +190,8 @@ const PageNumbers = ({
   useMinimalControls,
 }: PageNumbersProps) => {
   const finalArr = generatePageArray(items, currentPageState, leftMargin, rightMargin, displayRange);
+
+
 
   let prevIndex = -1;
 

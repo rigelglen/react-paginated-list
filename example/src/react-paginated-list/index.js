@@ -1,5 +1,5 @@
 /* eslint-disable */
-import { useState, createElement, Fragment } from 'react';
+import { useState, useEffect, createElement, Fragment } from 'react';
 import styled from 'styled-components';
 
 /*! *****************************************************************************
@@ -86,6 +86,15 @@ var generatePageArray = function (items, currentPage, leftMargin, rightMargin, d
 var PaginatedList = function (_a) {
     var list = _a.list, _b = _a.itemsPerPage, itemsPerPage = _b === void 0 ? 10 : _b, onPageChange = _a.onPageChange, renderList = _a.renderList, _c = _a.isLoading, isLoading = _c === void 0 ? false : _c, _d = _a.ControlItem, ControlItem = _d === void 0 ? DefaultControlItem : _d, _e = _a.ControlContainer, ControlContainer = _e === void 0 ? DefaultControlContainer : _e, _f = _a.PaginatedListContainer, PaginatedListContainer = _f === void 0 ? DefaultPaginationContainer : _f, _g = _a.loadingItem, loadingItem = _g === void 0 ? function () { return createElement("p", null, "Loading..."); } : _g, _h = _a.breakText, breakText = _h === void 0 ? '...' : _h, _j = _a.breakClass, breakClass = _j === void 0 ? 'pagination-break' : _j, _k = _a.displayRange, displayRange = _k === void 0 ? 3 : _k, _l = _a.leftMargin, leftMargin = _l === void 0 ? 1 : _l, _m = _a.rightMargin, rightMargin = _m === void 0 ? 1 : _m, _o = _a.currentPage, currentPage = _o === void 0 ? 1 : _o, _p = _a.displayNumbers, displayNumbers = _p === void 0 ? true : _p, _q = _a.loopAround, loopAround = _q === void 0 ? false : _q, _r = _a.nextClass, nextClass = _r === void 0 ? 'next' : _r, _s = _a.prevClass, prevClass = _s === void 0 ? 'prev' : _s, _t = _a.controlClass, controlClass = _t === void 0 ? 'pagination' : _t, _u = _a.activeControlClass, activeControlClass = _u === void 0 ? 'active' : _u, _v = _a.nextText, nextText = _v === void 0 ? '〉' : _v, _w = _a.prevText, prevText = _w === void 0 ? '〈' : _w, _x = _a.controlItemClass, controlItemClass = _x === void 0 ? 'pagination-item' : _x, _y = _a.showPrev, showPrev = _y === void 0 ? true : _y, _z = _a.showNext, showNext = _z === void 0 ? true : _z, _0 = _a.useMinimalControls, useMinimalControls = _0 === void 0 ? false : _0, paginatedListContainerClass = _a.paginatedListContainerClass;
     var _1 = useState(currentPage - 1), currentPageState = _1[0], setcurrentPageState = _1[1];
+    useEffect(function () {
+        var maxPage = Math.floor((list.length - 1) / itemsPerPage);
+        if (maxPage < currentPageState) {
+            setcurrentPageState(maxPage);
+        }
+        if (maxPage < 0) {
+            setcurrentPageState(0);
+        }
+    }, [list.length]);
     var onPageNumberChange = function (page, amount) {
         if (amount === void 0) { amount = 0; }
         var result = page + (amount % Math.ceil(list.length / itemsPerPage));
