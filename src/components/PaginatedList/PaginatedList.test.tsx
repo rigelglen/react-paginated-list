@@ -3,7 +3,7 @@ import Adapter from 'enzyme-adapter-react-16';
 import 'jest-styled-components';
 import React from 'react';
 import styled from 'styled-components';
-import { PaginatedList } from './paginatedList';
+import { PaginatedList } from './PaginatedList';
 Enzyme.configure({ adapter: new Adapter() });
 
 const list = [

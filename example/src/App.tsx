@@ -73,11 +73,22 @@ function App() {
     setCounter(counter + 1);
   };
 
+  const removeItem = () => {
+    setState({
+      ...state,
+      users: [
+        ...state.users.slice(0, state.users.length - 1),
+      ],
+    });
+    if (counter > 1) setCounter(counter - 1);
+  };
+
   return (
     <div className="App">
       <div className="container">
         <h1>React Paginated List</h1>
-        <Button onClick={addItem}>Add item</Button>
+        <Button onClick={addItem}>Add Item</Button>
+        <Button onClick={removeItem}>Remove Item</Button>
         <PaginatedList<User>
           list={state.users}
           itemsPerPage={5}
